@@ -72,7 +72,7 @@
    ::http/type :jetty
    ;; ::http/host "localhost"
 
-   ::http/port (Integer. (or (System/getenv "PORT") 5000))
+   ::http/port (Integer. (or (System/getenv "PORT") 8080))
    ;;::http/port 8080
 
    ;; Options to pass to the container (Jetty)
