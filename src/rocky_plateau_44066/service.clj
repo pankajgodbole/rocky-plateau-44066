@@ -1,5 +1,6 @@
 (ns rocky-plateau-44066.service
-  (:require [io.pedestal.http :as http]
+  (:require [environ.core :refer [env]]
+            [io.pedestal.http :as http]
             [io.pedestal.http.route :as route]
             [io.pedestal.http.body-params :as body-params]
             [ring.util.response :as ring-resp]))
@@ -12,7 +13,7 @@
 
 (defn home-page
   [request]
-  (ring-resp/response "Hello from Heroku: rocky-plateau-44066.service!"))
+  (ring-resp/response "Hello from Heroku 2"))
 
 ;; Defines "/" and "/about" routes with their associated :get handlers.
 ;; The interceptors defined after the verb map (e.g., {:get home-page}
@@ -37,6 +38,7 @@
 
 ;; Consumed by rocky-plateau-44066.server/create-server
 ;; See http/default-interceptors for additional options you can configure
+
 (def service
   {:env :prod
    ;; You can bring your own non-default interceptors. Make
@@ -70,10 +72,10 @@
    ;; This can also be your own chain provider/server-fn --
    ;; http://pedestal.io/reference/architecture-overview#_chain_provider
    ::http/type :jetty
-   ;; ::http/host "localhost"
+   ::http/host "localhost"
 
-   ::http/port (Integer. (or (System/getenv "PORT") 8080))
-   ;;::http/port 8080
+   ;; ::http/port 8080
+   ::http/port (Integer. (or (environ.core/env :port) 8080))
 
    ;; Options to pass to the container (Jetty)
    ;; ::http/container-options {:h2c? true
