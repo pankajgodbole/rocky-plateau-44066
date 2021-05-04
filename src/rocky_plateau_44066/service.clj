@@ -75,7 +75,7 @@
    ::http/host "localhost"
 
    ;; ::http/port 8080
-   ::http/port (Integer. (or (environ.core/env :port) 8080))
+   ::http/port (Integer. (or (environ.core/env :port) 5000))
 
    ;; Options to pass to the container (Jetty)
    ;; ::http/container-options {:h2c? true
